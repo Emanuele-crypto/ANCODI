@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Analisi dei costi distillato Santoro</title>
+    <!-- Apple Touch Icon per schermata home iOS -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="Analisi Distillato">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- Aggiungiamo jQuery per compatibilità su più browser -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
+        /* Rimozione stili logo */
         .logo-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
-        }
-        
-        .logo {
-            max-width: 120px;
-            height: auto;
         }
         
         /* Stili aggiuntivi per rendere i campi di input chiaramente modificabili */
@@ -84,6 +84,11 @@
             margin-left: 10px;
             color: #666;
             width: 60px;
+            /* Correzione per le unità di misura che escono fuori */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-shrink: 0;
         }
         .section-title {
             background-color: #0b5e36;
@@ -176,24 +181,20 @@
             .two-columns {
                 flex-direction: column;
             }
+            /* Correzione aggiuntiva per schermi piccoli */
+            .input-group {
+                flex-wrap: wrap;
+            }
+            .input-group .unit {
+                margin-left: 5px;
+                width: auto;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo-container">
-            <svg class="logo" width="120" height="120" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-                <path d="M542.5 400C542.5 400 543 423 517.5 454C492 485 462 497 462 497C462 497 430.5 519.5 400 542.5C369.5 565.5 330 585.5 330 585.5C330 585.5 275 620 245 650C215 680 207.5 700 207.5 700L207.5 550C207.5 550 207.5 462.5 255 400C302.5 337.5 400 275 400 275C400 275 497.5 337.5 545 400C592.5 462.5 592.5 550 592.5 550L592.5 700C592.5 700 585 680 555 650C525 620 470 585.5 470 585.5C470 585.5 430.5 565.5 400 542.5" fill="#8cc63f" />
-                <path d="M542.5 400C542.5 400 543 423 517.5 454C492 485 462 497 462 497C462 497 430.5 519.5 400 542.5" fill="#73a534" />
-                <path d="M542.5 400C542.5 400 590 460 590 550L590 700" fill="#73a534" />
-                <path d="M400 275C400 275 375 293.75 350 317.5" fill="#73a534" />
-                <path d="M370 677.5C345 652.5 420 595 455 577.5C490 560 519 542.5 519 542.5C519 542.5 470 610 430 635C390 660 395 702.5 370 677.5Z" fill="white" />
-                <path d="M320 702.5C299.377 684.639 355 627.5 385 595C415 562.5 415 562.5 415 562.5C415 562.5 380 625 350 650C320 675 340.623 720.361 320 702.5Z" fill="white" />
-                <circle cx="590" cy="310" r="40" fill="#4aae48" />
-                <circle cx="543" cy="240" r="30" fill="#4aae48" />
-                <circle cx="470" cy="190" r="25" fill="#4aae48" />
-            </svg>
-        </div>
+        <!-- Rimosso contenitore logo e icona SVG -->
         <h1>Analisi dei costi distillato</h1>
         
         <div class="section">
@@ -321,7 +322,8 @@
                 </div>
             </div>
             
-            <table class="results-table">
+            <!-- Questa è la tabella che stiamo nascondendo -->
+            <table class="results-table" style="display: none;">
                 <tr>
                     <th>Voce di costo</th>
                     <th>Valore (€)</th>
@@ -526,7 +528,7 @@
                 }
             });
             
-            // Aggiornamento grafico a torta
+            // Aggiornamento grafico a torta con i colori corretti
             updateCostPieChart(gasCost, electricityCost, laborCost, waterCost);
         }
         
@@ -546,16 +548,16 @@
                     datasets: [{
                         data: [gasCost, electricityCost, laborCost, waterCost],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)'
+                            'rgba(255, 0, 0, 0.7)',    // Rosso per il gas
+                            'rgba(255, 255, 0, 0.7)',  // Giallo per l'elettricità
+                            'rgba(0, 128, 0, 0.7)',    // Verde per il personale
+                            'rgba(0, 0, 255, 0.7)'     // Blu per l'acqua
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
+                            'rgba(255, 0, 0, 1)',      // Rosso per il gas
+                            'rgba(255, 255, 0, 1)',    // Giallo per l'elettricità
+                            'rgba(0, 128, 0, 1)',      // Verde per il personale
+                            'rgba(0, 0, 255, 1)'       // Blu per l'acqua
                         ],
                         borderWidth: 1
                     }]
